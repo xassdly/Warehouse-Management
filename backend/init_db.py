@@ -1,5 +1,5 @@
 from app.core.database import Base, engine
-from app.models import item
+from app.models import item, location, user, order
 
 print("Creating tables in the database...")
 
