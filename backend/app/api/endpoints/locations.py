@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.core.database import SessionLocal
 from app.models import location as models
 from app.models import item as item_models
+from app.core.security import verify_user # test
 
 router = APIRouter()
 
@@ -13,6 +14,9 @@ def get_db():
     finally:
         db.close()
 
+@router.get("/protected") # test
+def get_protected(user: str = Depends(verify_user)):
+    return {"message": f"Hello {user}, role: {user["role"]}"}
 
 @router.get("/locations")
 def read_locations(db: Session = Depends(get_db)):
